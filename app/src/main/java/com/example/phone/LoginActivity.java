@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
+
+
     }
 
     public void login(View view){
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void register(View view){
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
     }

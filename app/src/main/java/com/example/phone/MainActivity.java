@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private String verificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
 
+    private String userid, fullname, phone, email, password, address, zipcode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,16 +210,22 @@ public class MainActivity extends AppCompatActivity {
             generateOTPBtn.setVisibility(View.VISIBLE);
         }
     };
-
     // below method is use to verify code from Firebase.
     private void verifyCode(String code) {
         // below line is used for getting getting
         // credentials from our verification id and code.
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-
         // after getting credential we are
         // calling sign in method.
         signInWithCredential(credential);
+    }
+
+    private void Save(){
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        userid = firebaseUser.getUid().toString().trim();
+        fullname = getIntent().getStringExtra("fullname");
+        phone = getIntent().getStringExtra("phone");
 
     }
+
 }
