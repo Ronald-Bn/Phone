@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">phone</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="you_re_logged_in_as">you\'re logged in as</string>
+    <string name="phone_number">Phone Verification</string>
+    <string name="logout">logout</string>
+    <string name="we_will_send_you_an_one_time_password_on_your_phone_number">We will send you an <b>One Time Password</b>\n on your phone number</string>
+</resources>
