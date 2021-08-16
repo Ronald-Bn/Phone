@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -22,6 +31,11 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,20 +43,20 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+
+    public static final int MY_DEFAULT_TIMEOUT = 15000;
+
     // variable for our text input
     // field for phone and OTP.
     private EditText edtPhone, edtOTP;
-
     // buttons for generating OTP and verifying OTP
     private Button verifyOTPBtn, generateOTPBtn;
-
     private LinearLayout layout1, layout2;
-
     // string for storing our verification ID
     private String verificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
-
     private String userid, fullname, phone, email, password, address, zipcode;
+    private final String URL = "http://192.168.254.105/android/register.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +110,55 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // if OTP field is not empty calling
                     // method to verify the OTP.
+                    userid = "123456";
+                    fullname = getIntent().getStringExtra("fullname");
+                    phone = getIntent().getStringExtra("phonenum");
+                    email = getIntent().getStringExtra("email");
+                    password = getIntent().getStringExtra("password");
+                    address = getIntent().getStringExtra("address");
+                    zipcode = getIntent().getStringExtra("zipcode");
+
+                    if(!userid.equals("") && !fullname.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") &&!address.equals("") && !zipcode.equals(""))
+                    {
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if (response.equals("success")) {
+                                    Toast.makeText(MainActivity.this, "Successfully registered.", Toast.LENGTH_SHORT).show();
+                                } else if (response.equals("failure")) {
+                                    Toast.makeText(MainActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(),  error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }){
+                            @Override
+                            protected @NotNull Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> data = new HashMap<>();
+                                data.put("userid", userid);
+                                data.put("fullname", fullname);
+                                data.put("phone", phone);
+                                data.put("email", email);
+                                data.put("password", password);
+                                data.put("address", address);
+                                data.put("zipcode", zipcode);
+                                return data;
+                            }
+
+                        };
+                        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                                MY_DEFAULT_TIMEOUT,
+                                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                        requestQueue.add(stringRequest);
+                        requestQueue.start();
+                    }else{
+                        Toast.makeText(MainActivity.this, "Somethings wrong ", Toast.LENGTH_SHORT).show();
+                    }
                     verifyCode(edtOTP.getText().toString());
                 }
             }
@@ -118,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // if the code is not correct then we are
                             // displaying an error message to the user.
-                            Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -170,7 +233,6 @@ public class MainActivity extends AppCompatActivity {
             verificationId = s;
             mResendToken = token;
             layout1.setVisibility(View.GONE);
-
             layout2.setVisibility(View.VISIBLE);
         }
 
@@ -220,12 +282,44 @@ public class MainActivity extends AppCompatActivity {
         signInWithCredential(credential);
     }
 
-    private void Save(){
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        userid = firebaseUser.getUid().toString().trim();
-        fullname = getIntent().getStringExtra("fullname");
-        phone = getIntent().getStringExtra("phone");
+    /*public void save(View view){
 
-    }
+        if(!userid.equals("") && !fullname.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") &&!address.equals("") && !zipcode.equals(""))
+        {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (response.equals("success")) {
+                        Toast.makeText(MainActivity.this, "Successfully registered.", Toast.LENGTH_SHORT).show();
+                    } else if (response.equals("failure")) {
+                        Toast.makeText(MainActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+            }){
+                @Override
+                protected @NotNull Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("userid", userid);
+                    data.put("fullname", fullname);
+                    data.put("phone", phone);
+                    data.put("email", email);
+                    data.put("password", password);
+                    data.put("address", address);
+                    data.put("zipcode", zipcode);
+                    return data;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }else{
+            Toast.makeText(this, "Somethings wrong ", Toast.LENGTH_SHORT).show();
+        }
+
+    }*/
 
 }

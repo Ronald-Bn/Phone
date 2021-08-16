@@ -24,16 +24,11 @@ public class HomeActivity extends AppCompatActivity {
         Button button = findViewById(R.id.logoutBtn);
         usernumber = findViewById(R.id.phoneTv);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        checkUserStatus();
 
         button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            firebaseAuth.signOut();
-            checkUserStatus();
-            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-            startActivity(intent);
+
         }
     });
 }

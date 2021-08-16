@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private String email, password;
+    private Button btn_Register, btn_Login;
     private final String URL = "http://192.168.254.105/android/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         email = password = "";
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-
-
+        btn_Login =findViewById(R.id.Btn_SignIn);
+        btn_Register = findViewById(R.id.Btn_MainRegister);
 
     }
 
@@ -69,7 +72,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
             };
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
             requestQueue.add(stringRequest);
+            requestQueue.start();
         }else{
             Toast.makeText(this, "Field can not be empty!", Toast.LENGTH_SHORT).show();
         }
