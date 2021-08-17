@@ -16,6 +16,11 @@
     <string name="address">address</string>
     <string name="zipcode">zipcode</string>
     <string name="checkbox">CheckBox</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="description">Description</string>
+    <string name="status">Status</string>
 
     <string-array name="avail">
         <item>Available</item>

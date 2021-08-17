@@ -17,7 +17,7 @@
         android:autofillHints="Name"
         android:ems="10"
         android:layout_gravity="center"
-        android:hint="Name"
+        android:hint="@string/name"
         android:inputType="textPersonName"
         tools:ignore="TextFields" />
 
@@ -29,7 +29,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Price"
+        android:hint="@string/price"
         android:inputType="number"
         />
 
@@ -41,7 +41,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Category"
+        android:hint="@string/category"
         android:inputType="number"
         />
 
@@ -53,7 +53,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Description"
+        android:hint="@string/description"
         android:inputType="text"
         />
 
@@ -63,8 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        app:boxStrokeColor="@color/white"
-        app:placeholderTextColor="@color/white"
+        app:boxStrokeColor="@color/reddish"
         >
 
         <AutoCompleteTextView
@@ -73,7 +72,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="Status" />
+            android:text="@string/status"
+            tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
