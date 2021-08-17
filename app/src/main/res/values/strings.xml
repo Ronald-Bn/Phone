@@ -16,4 +16,9 @@
     <string name="address">address</string>
     <string name="zipcode">zipcode</string>
     <string name="checkbox">CheckBox</string>
+
+    <string-array name="avail">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
 </resources>
