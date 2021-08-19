@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -36,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
        btn_register.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               if (TextUtils.isEmpty(etfullname.getText())) {
+               /*if (TextUtils.isEmpty(etfullname.getText())) {
                    Toast.makeText(RegisterActivity.this, "Please Enter Your Full Name", Toast.LENGTH_SHORT).show();
                } else if (TextUtils.isEmpty(etphonenum.getText()) || etphonenum.getText().length() != 11) {
                    Toast.makeText(RegisterActivity.this, "Please Enter Your Phone Number", Toast.LENGTH_SHORT).show();
@@ -53,7 +54,11 @@ public class RegisterActivity extends AppCompatActivity {
                }else if (!etpassword.getText().toString().trim().equals(etconfirmpassword.getText().toString().trim())) {
                    Toast.makeText(RegisterActivity.this, "The Password is Not Match", Toast.LENGTH_SHORT).show();
                }else {
-                   Intent intent = new Intent(RegisterActivity.this , MainActivity.class);
+               }*/
+               if(!validateEmail()){
+                   return;
+               }else {
+                   Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                    intent.putExtra("fullname", etfullname.getText().toString());
                    intent.putExtra("phonenum", etphonenum.getText().toString());
                    intent.putExtra("email", etemail.getText().toString());
@@ -65,4 +70,28 @@ public class RegisterActivity extends AppCompatActivity {
            }
        });
     }
+
+    private boolean validateFullName(){
+        String fullNameInput = etfullname.getText().toString();
+        if (fullNameInput.isEmpty()) {
+            etemail.setError("Field can't be empty");
+            return false;
+        }
+        return true;
+    }
+    private boolean validateEmail(){
+        String emailInput = etemail.getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            etemail.setError("Field can't be empty");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            etemail.setError("Please enter a valid email address");
+            return false;
+        } else {
+            etemail.setError(null);
+            return true;
+        }
+    }
+
 }

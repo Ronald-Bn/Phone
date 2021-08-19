@@ -110,55 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // if OTP field is not empty calling
                     // method to verify the OTP.
-                    userid = "123456";
-                    fullname = getIntent().getStringExtra("fullname");
-                    phone = getIntent().getStringExtra("phonenum");
-                    email = getIntent().getStringExtra("email");
-                    password = getIntent().getStringExtra("password");
-                    address = getIntent().getStringExtra("address");
-                    zipcode = getIntent().getStringExtra("zipcode");
-
-                    if(!userid.equals("") && !fullname.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") &&!address.equals("") && !zipcode.equals(""))
-                    {
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                if (response.equals("success")) {
-                                    Toast.makeText(MainActivity.this, "Successfully registered.", Toast.LENGTH_SHORT).show();
-                                } else if (response.equals("failure")) {
-                                    Toast.makeText(MainActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getApplicationContext(),  error.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        }){
-                            @Override
-                            protected @NotNull Map<String, String> getParams() throws AuthFailureError {
-                                Map<String, String> data = new HashMap<>();
-                                data.put("userid", userid);
-                                data.put("fullname", fullname);
-                                data.put("phone", phone);
-                                data.put("email", email);
-                                data.put("password", password);
-                                data.put("address", address);
-                                data.put("zipcode", zipcode);
-                                return data;
-                            }
-
-                        };
-                        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                                MY_DEFAULT_TIMEOUT,
-                                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                        requestQueue.add(stringRequest);
-                        requestQueue.start();
-                    }else{
-                        Toast.makeText(MainActivity.this, "Somethings wrong ", Toast.LENGTH_SHORT).show();
-                    }
                     verifyCode(edtOTP.getText().toString());
                 }
             }
@@ -173,8 +124,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+
                             // if the code is correct and the task is successful
                             // we are sending our user to new activity.
+                            save();
                             Intent i = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(i);
                             finish();
@@ -282,8 +236,14 @@ public class MainActivity extends AppCompatActivity {
         signInWithCredential(credential);
     }
 
-    /*public void save(View view){
-
+    public void save(){
+        userid = "123456";
+        fullname = getIntent().getStringExtra("fullname");
+        phone = getIntent().getStringExtra("phonenum");
+        email = getIntent().getStringExtra("email");
+        password = getIntent().getStringExtra("password");
+        address = getIntent().getStringExtra("address");
+        zipcode = getIntent().getStringExtra("zipcode");
         if(!userid.equals("") && !fullname.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") &&!address.equals("") && !zipcode.equals(""))
         {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -320,6 +280,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Somethings wrong ", Toast.LENGTH_SHORT).show();
         }
 
-    }*/
+    }
 
 }

@@ -77,5 +77,11 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:backgroundTint="@color/reddish"/>
 
 </LinearLayout>
