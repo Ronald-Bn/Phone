@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layout1, layout2;
     // string for storing our verification ID
     private String verificationId;
+
+    private ProgressBar progressBar;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String userid, fullname, phone, email, password, address, zipcode;
     private final String URL = "http://192.168.254.105/android/register.php";
@@ -75,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         verifyOTPBtn = findViewById(R.id.idBtnVerify);
         generateOTPBtn = findViewById(R.id.idBtnGetOtp);
 
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+
         // setting onclick listener for generate OTP button.
         generateOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     // if the text field is not empty we are calling our
                     // send OTP method for getting OTP from Firebase.
                     String phone = "+63" + edtPhone.getText().toString();
+                    progressBar.setVisibility(View.VISIBLE);
                     generateOTPBtn.setVisibility(View.GONE);
                     sendVerificationCode(phone);
                 }
@@ -191,16 +197,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
         // this method is called when user
         // receive OTP from Firebase.
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
             // below line is used for getting OTP code
             // which is sent in phone auth credentials.
-            final String code = phoneAuthCredential.getSmsCode();
 
+            final String code = phoneAuthCredential.getSmsCode();
             // checking if the code
             // is null or not.
             if (code != null) {
@@ -208,13 +212,12 @@ public class MainActivity extends AppCompatActivity {
                 // we are setting that code to
                 // our OTP edittext field.
                 edtOTP.setText(code);
-
                 // after setting this code
                 // to OTP edittext field we
                 // are calling our verifycode method.
                 verifyCode(code);
-
             }
+            verifyOTPBtn.setVisibility(View.INVISIBLE);
         }
 
         // this method is called when firebase doesn't
@@ -279,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Somethings wrong ", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }

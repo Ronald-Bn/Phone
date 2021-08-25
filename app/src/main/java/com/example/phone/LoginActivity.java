@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
+
 
     private EditText etEmail, etPassword;
     private String email, password;
@@ -81,8 +83,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void register(View view){
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-        finish();
+        startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
     }
 }

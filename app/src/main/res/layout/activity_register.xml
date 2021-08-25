@@ -1,94 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/reddish"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".RegisterActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:fontFamily="@font/script_mt"
+        android:textColor="@color/white"
+        android:text="Register Form" />
 
     <EditText
         android:id="@+id/EditTextFullName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:autofillHints="full_name"
         android:hint="@string/full_name"
+        android:textSize="16sp"
         android:textColorHint="@xml/selector"
         android:textColor="@color/white"
-        android:inputType="text"
+        android:inputType="textPersonName"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        />
 
     <EditText
         android:id="@+id/EditTextPhoneNum"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/phone_number1"
+        android:textSize="16sp"
         android:inputType="phone"
         android:textColorHint="@xml/selector"
         android:textColor="@color/white"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextFullName"
-        app:layout_constraintVertical_bias="0.042"
         android:autofillHints="@string/phone_number" />
 
     <EditText
         android:id="@+id/EditTextRegisterEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:autofillHints="@string/email"
         android:hint="@string/email"
+        android:textSize="16sp"
         android:inputType="textWebEmailAddress"
         android:textColorHint="@xml/selector"
         android:textColor="@color/white"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextPhoneNum"
-        app:layout_constraintVertical_bias="0.057" />
+        />
 
     <EditText
         android:id="@+id/EditTextPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/password"
+        android:textSize="16sp"
         android:inputType="textPassword"
         android:textColorHint="@xml/selector"
         android:textColor="@color/white"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextRegisterEmail"
-        app:layout_constraintVertical_bias="0.072"
         android:autofillHints="@string/password" />
 
     <EditText
         android:id="@+id/EditTextConfirmPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/confirm_password"
+        android:textSize="16sp"
         android:textColorHint="@xml/selector"
         android:textColor="@color/white"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextPassword"
-        app:layout_constraintVertical_bias="0.09"
         android:autofillHints="confirm_password"
         android:inputType="textPassword" />
 
@@ -96,16 +89,12 @@
         android:id="@+id/EditTextAddress"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/address"
         android:textColorHint="@xml/selector"
         android:textColor="@color/white"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextConfirmPassword"
-        app:layout_constraintVertical_bias="0.101"
+        android:textSize="16sp"
         android:autofillHints="address"
         android:inputType="text" />
 
@@ -113,10 +102,12 @@
         android:id="@+id/EditTextZipCode"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/zipcode"
         android:textColorHint="@xml/selector"
         android:textColor="@color/white"
         android:backgroundTint="@color/white"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -126,31 +117,25 @@
         android:inputType="number"
         android:autofillHints="zipcode" />
 
-    <Button
-        android:id="@+id/Btn_Register"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextZipCode"
-        app:layout_constraintVertical_bias="0.575" />
-
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/checkbox"
-        app:layout_constraintBottom_toTopOf="@+id/Btn_Register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.173"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextZipCode"
-        app:layout_constraintVertical_bias="0.175" />
+        android:textSize="13sp"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/Btn_Register"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textColor="@color/black" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

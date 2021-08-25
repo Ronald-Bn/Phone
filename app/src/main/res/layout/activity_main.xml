@@ -49,9 +49,8 @@
             android:id="@+id/idEdtPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:hint="Enter Phone Number"
             android:textSize="14sp"
+            android:hint="@string/enter_phone_number"
             android:textAlignment="center"
             android:importantForAutofill="no"
             android:layout_marginTop="10dp"
@@ -66,10 +65,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_below="@id/idEdtPhoneNumber"
-            android:text="Get OTP"
+            android:text="@string/get_otp"
             android:backgroundTint="#DA0000"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:targetApi="lollipop" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <!--Edittext for getting otp from user-->
@@ -77,16 +84,49 @@
         android:id="@+id/idLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
 
-    <EditText
+        <ImageView
+            android:id="@+id/iconIv2"
+            android:layout_width="150dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_phone_android_24"
+            android:contentDescription="@string/app_name" />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/phone_number"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="#000"/>
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/you_will_get_an_otp_via_sms"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textColor="#777777"/>
+
+        <EditText
         android:id="@+id/idEdtOtp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/idBtnGetOtp"
         android:layout_margin="10dp"
-        android:hint="Enter OTP"
+        android:hint="@string/enter_otp"
         android:importantForAutofill="no"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:inputType="phone" />
 
     <!--button for verifying user OTP-->
@@ -94,9 +134,20 @@
         android:id="@+id/idBtnVerify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/idEdtOtp"
         android:layout_margin="10dp"
-        android:text="Verify OTP"
-        android:textAllCaps="false" />
+        android:text="@string/verify_otp"
+        android:backgroundTint="#DA0000"
+        android:textAllCaps="false"
+        tools:targetApi="lollipop" />
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/you_will_get_an_otp_via_sms"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textColor="#000000"/>
     </LinearLayout>
 </LinearLayout>

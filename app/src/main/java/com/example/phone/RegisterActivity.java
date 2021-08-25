@@ -22,6 +22,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setElevation(0);
+        
         etfullname = findViewById(R.id.EditTextFullName);
         etphonenum = findViewById(R.id.EditTextPhoneNum);
         etemail = findViewById(R.id.EditTextRegisterEmail);
@@ -37,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
        btn_register.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               /*if (TextUtils.isEmpty(etfullname.getText())) {
+               if (TextUtils.isEmpty(etfullname.getText())) {
                    Toast.makeText(RegisterActivity.this, "Please Enter Your Full Name", Toast.LENGTH_SHORT).show();
                } else if (TextUtils.isEmpty(etphonenum.getText()) || etphonenum.getText().length() != 11) {
                    Toast.makeText(RegisterActivity.this, "Please Enter Your Phone Number", Toast.LENGTH_SHORT).show();
@@ -53,11 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
                    Toast.makeText(RegisterActivity.this, "Please Enter Your Zip Code", Toast.LENGTH_SHORT).show();
                }else if (!etpassword.getText().toString().trim().equals(etconfirmpassword.getText().toString().trim())) {
                    Toast.makeText(RegisterActivity.this, "The Password is Not Match", Toast.LENGTH_SHORT).show();
-               }else {
-               }*/
-               if(!validateEmail()){
-                   return;
-               }else {
+               }else if (etpassword.getText().toString().trim().length() < 8) {
+               Toast.makeText(RegisterActivity.this, "Password must at least 8 characters", Toast.LENGTH_SHORT).show();
+                }else {
                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                    intent.putExtra("fullname", etfullname.getText().toString());
                    intent.putExtra("phonenum", etphonenum.getText().toString());
@@ -71,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
        });
     }
 
-    private boolean validateFullName(){
+   /* private boolean validateFullName(){
         String fullNameInput = etfullname.getText().toString();
         if (fullNameInput.isEmpty()) {
             etemail.setError("Field can't be empty");
@@ -93,5 +95,5 @@ public class RegisterActivity extends AppCompatActivity {
             return true;
         }
     }
-
+*/
 }

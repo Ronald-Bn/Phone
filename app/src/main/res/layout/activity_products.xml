@@ -1,70 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
 
 
     tools:context=".ProductsActivity">
 
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="196dp"
+        android:layout_height="172dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher_foreground"
+        tools:ignore="ContentDescription" />
 
-    <EditText
-        android:id="@+id/etName"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:autofillHints="Name"
-        android:ems="10"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:hint="@string/name"
-        android:inputType="textPersonName"
-        tools:ignore="TextFields" />
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        >
 
-    <EditText
-        android:id="@+id/etPrice"
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:inputType="textPersonName"
+            tools:ignore="TextFields"
+            android:importantForAutofill="no" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:autofillHints="Price"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:ems="10"
         android:hint="@string/price"
-        android:inputType="number"
-        />
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        >
 
-    <EditText
-        android:id="@+id/etCategory"
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:importantForAutofill="no" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:autofillHints="Price"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:ems="10"
         android:hint="@string/category"
-        android:inputType="number"
-        />
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        >
 
-    <EditText
-        android:id="@+id/etDescription"
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:importantForAutofill="no" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:autofillHints="Price"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:ems="10"
         android:hint="@string/description"
-        android:inputType="text"
-        />
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        >
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        app:boxStrokeColor="@color/reddish"
-        >
+        android:layout_marginTop="10dp">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView"
@@ -72,16 +126,39 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="@string/status"
+            android:hint="@string/status"
+            android:text=""
+            android:textSize="14sp"
             tools:ignore="LabelFor" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="300dp"
         android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:backgroundTint="@color/reddish"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnbrowse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/reddish"
+            android:text="@string/browse"
+            tools:ignore="UnusedAttribute" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/reddish"
+            android:text="@string/add"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
 
 </LinearLayout>
