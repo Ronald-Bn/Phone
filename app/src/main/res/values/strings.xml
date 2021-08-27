@@ -34,4 +34,10 @@
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
+
+    <string-array name="notavail">
+        <item>Not Available</item>
+        <item>Available</item>
+    </string-array>
+
 </resources>

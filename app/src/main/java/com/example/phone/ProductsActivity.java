@@ -53,7 +53,7 @@ public class ProductsActivity extends AppCompatActivity {
     ImageView img;
     String encodeImageString;
     Bitmap bitmap;
-    private static final String url="http://192.168.254.105/android/products.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,18 +138,13 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     private void uploaddatatodb() {
-       /* etName = (EditText) findViewById(R.id.etName);
-        etPrice = (EditText) findViewById(R.id.etPrice);
-        etCategory = (EditText) findViewById(R.id.etCategory);
-        etDescription = (EditText) findViewById(R.id.etDescription);
-        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);*/
         final String name = etName.getText().toString().trim();
         final String price = etPrice.getText().toString().trim();
         final String category = etCategory.getText().toString().trim();
         final String description = etDescription.getText().toString().trim();
         final String status = autoCompleteTextView.getText().toString().trim();
 
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Urls.ADD_PRODUCTS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 etName.setText("");
@@ -157,7 +152,7 @@ public class ProductsActivity extends AppCompatActivity {
                 etCategory.setText("");
                 etDescription.setText("");
                 img.setImageResource(R.drawable.ic_launcher_foreground);
-                Toast.makeText(ProductsActivity.this, "success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductsActivity.this, "Product Added Successfully", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String userid, fullname, phone, email, password, address, zipcode;
-    private final String URL = "http://192.168.254.105/android/register.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         zipcode = getIntent().getStringExtra("zipcode");
         if(!userid.equals("") && !fullname.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") &&!address.equals("") && !zipcode.equals(""))
         {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.REGISTER_USERS, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     if (response.equals("success")) {

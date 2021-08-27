@@ -23,22 +23,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ViewProductsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ProductsAdapter productsAdapter;
     private List<Products> productsList;
-    private FloatingActionButton btnFloating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_products);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_product_list);
-        btnFloating = findViewById(R.id.fab_btn);
+        FloatingActionButton btnFloating = findViewById(R.id.fab_btn);
         recyclerView = findViewById(R.id.recyclerList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,7 +56,7 @@ public class ViewProductsActivity extends AppCompatActivity {
     }
 
     private void LoadAllProducts() {
-        JsonArrayRequest request = new JsonArrayRequest(Urls.SHOW_ALL_USER_DATA_URL, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Urls.SHOW_ALL_PRODUCTS, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray array) {
                 for (int i = 0; i < array.length(); i++) {
@@ -96,5 +96,6 @@ public class ViewProductsActivity extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(ViewProductsActivity.this);
         requestQueue.add(request);
+        requestQueue.start();
     }
 }

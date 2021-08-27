@@ -8,7 +8,6 @@
     android:gravity="center"
     tools:context=".HomeActivity">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,18 +15,41 @@
         android:textColor="#000"/>
 
     <TextView
-        android:id="@+id/phoneTv"
+        android:id="@+id/FullNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/phone_number"
         android:layout_marginTop="10dp"
         android:textColor="#777777"/>
 
+    <TextView
+        android:id="@+id/PhoneTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        android:layout_marginTop="10dp"
+        android:textColor="#777777"/>
+
+    <TextView
+        android:id="@+id/EmailTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        android:layout_marginTop="10dp"
+        android:textColor="#777777"/>
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:onClick="logout"
         android:text="@string/logout"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/HomeRecyclerList"/>
+
 
 
 </LinearLayout>

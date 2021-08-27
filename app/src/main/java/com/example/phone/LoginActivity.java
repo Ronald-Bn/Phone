@@ -21,6 +21,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +34,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private String email, password;
     private Button btn_Register, btn_Login;
-    private final String URL = "http://192.168.254.105/android/login.php";
+
+    Users users;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,21 +47,48 @@ public class LoginActivity extends AppCompatActivity {
         btn_Login =findViewById(R.id.Btn_SignIn);
         btn_Register = findViewById(R.id.Btn_MainRegister);
 
+        users = new Users(this);
+
+        btn_Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
     }
 
-    public void login(View view){
+    public void login(){
         email = etEmail.getText().toString().trim();
         password = etPassword.getText().toString().trim();
         if(!email.equals("") && !password.equals("")){
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.LOGIN_USERS, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    if (response.equals("success")) {
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else if (response.equals("failure")) {
-                        Toast.makeText(LoginActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String result = jsonObject.getString("status");
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        if (result.equals("success")) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject object = jsonArray.getJSONObject(i);
+                                String name = object.getString("fullname");
+                                String email = object.getString("email");
+                                String phone = object.getString("phone");
+
+                                users.UserSessionManage(name,email,phone);
+
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                intent.putExtra("fullname", name);
+                                intent.putExtra("email", email);
+                                intent.putExtra("phone", phone);
+                                startActivity(intent);finish();
+                            }
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (JSONException e){
+                        e.printStackTrace();
                     }
                 }
             }, new Response.ErrorListener() {

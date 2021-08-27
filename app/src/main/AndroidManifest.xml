@@ -18,16 +18,10 @@
         <activity
             android:name=".ViewProductsActivity"
             android:theme="@style/Theme.Products">
-
         </activity>
         <activity
             android:name=".ProductsActivity"
             android:parentActivityName=".ViewProductsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -37,7 +31,13 @@
             android:name=".LoginActivity"
             android:theme="@style/NoActionBar">
         </activity>
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".HomeActivity" android:theme="@style/Theme.HomePage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"></activity>

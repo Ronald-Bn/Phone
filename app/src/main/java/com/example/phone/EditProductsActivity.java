@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -41,43 +40,37 @@ import java.util.Map;
 
 public class EditProductsActivity extends AppCompatActivity {
 
-    private String id, name, price, category, description, status, image;
+    private String id;
     private EditText nameEdit, priceEdit, categoryEdit, descriptionEdit;
     private ImageView Image;
-    private Button btnBrowseEdit, btnEdit;
-
     String encodeImageString;
     Bitmap bitmap;
-
     AutoCompleteTextView statusEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_products);
+
+        //Initialize id;
         nameEdit = findViewById(R.id.etNameEdit);
         priceEdit = findViewById(R.id.etPriceEdit);
         categoryEdit = findViewById(R.id.etCategoryEdit);
         descriptionEdit = findViewById(R.id.etDescriptionEdit);
         statusEdit = findViewById(R.id.actvStatusEdit);
         Image = findViewById(R.id.imgEdit);
-        btnBrowseEdit = findViewById(R.id.btnbrowseEdit);
-        btnEdit =findViewById(R.id.btnEdit);
+        Button btnBrowseEdit = findViewById(R.id.btnbrowseEdit);
+        Button btnEdit = findViewById(R.id.btnEdit);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.avail, R.layout.dropdown_item);
-        adapter.setDropDownViewResource(R.layout.dropdown_item);
-        statusEdit.setAdapter(adapter);
-
+        //Get string from adapter;
         id = getIntent().getStringExtra("id");
-        name = getIntent().getStringExtra("name");
-        price = getIntent().getStringExtra("price");
-        category = getIntent().getStringExtra("category");
-        description = getIntent().getStringExtra("description");
-        status = getIntent().getStringExtra("status");
-        image = getIntent().getStringExtra("image");
+        String name = getIntent().getStringExtra("name");
+        String price = getIntent().getStringExtra("price");
+        String category = getIntent().getStringExtra("category");
+        String description = getIntent().getStringExtra("description");
+        String status = getIntent().getStringExtra("status");
+        String image = getIntent().getStringExtra("image");
 
-
-        Toast.makeText(this,  image, Toast.LENGTH_SHORT).show();
-
+        //Transfer String into Edittext;
         nameEdit.setText(name);
         priceEdit.setText(price);
         categoryEdit.setText(category);
@@ -87,6 +80,12 @@ public class EditProductsActivity extends AppCompatActivity {
                 .load(image)
                 .into(Image);
 
+        //Status adapter
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.avail, R.layout.dropdown_item);
+        adapter.setDropDownViewResource(R.layout.dropdown_item);
+        statusEdit.setAdapter(adapter);
+
+        //Update products in the Database
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +93,7 @@ public class EditProductsActivity extends AppCompatActivity {
             }
         });
 
-
+        //Browse photo in the gallery
         btnBrowseEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +124,7 @@ public class EditProductsActivity extends AppCompatActivity {
 
     }
 
+    //Data to Bitmap
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -141,6 +141,7 @@ public class EditProductsActivity extends AppCompatActivity {
         }
     }
 
+    //Bitmap to EncodedString
     private void encodeBitmapImage(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
@@ -148,6 +149,8 @@ public class EditProductsActivity extends AppCompatActivity {
         byte[] bytesofimage = byteArrayOutputStream.toByteArray();
         encodeImageString= android.util.Base64.encodeToString(bytesofimage, Base64.DEFAULT);
     }
+
+    //Update products in the Database
     private void EditProductsDb() {
         final String Name =  nameEdit.getText().toString().trim();
         final String Price = priceEdit.getText().toString().trim();
@@ -159,7 +162,7 @@ public class EditProductsActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.EDIT_PRODUCTS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(EditProductsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProductsActivity.this, response, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EditProductsActivity.this,ViewProductsActivity.class);
                 startActivity(intent);
             }
