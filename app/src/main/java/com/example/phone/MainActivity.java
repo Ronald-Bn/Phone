@@ -283,5 +283,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Somethings wrong ", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

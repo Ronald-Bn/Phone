@@ -13,33 +13,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
-    FirebaseAuth firebaseAuth;
-    private TextView usernumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button button = findViewById(R.id.logoutBtn);
-        usernumber = findViewById(R.id.phoneTv);
 
-
-        button.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    });
-}
-
-    private void checkUserStatus() {
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if(firebaseUser != null){
-            String UserId = firebaseUser.getUid();
-            usernumber.setText(UserId);
-        }else{
-            finish();
-        }
     }
 }

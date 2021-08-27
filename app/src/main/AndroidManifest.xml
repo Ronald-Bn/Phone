@@ -9,25 +9,33 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Chasy Products"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Phone">
-        <activity android:name=".ViewProductsActivity"></activity>
-        <activity android:name=".ProductsActivity"></activity>
+        <activity android:name=".EditProductsActivity"></activity>
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:name=".ViewProductsActivity"
+            android:theme="@style/Theme.Products">
+
+        </activity>
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/NoActionBar">
+            android:name=".ProductsActivity"
+            android:parentActivityName=".ViewProductsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/NoActionBar">
         </activity>
         <activity android:name=".HomeActivity" />
         <activity

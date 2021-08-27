@@ -1,6 +1,7 @@
 package com.example.phone;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -45,14 +46,13 @@ public class ProductsActivity extends AppCompatActivity {
 
     private AutoCompleteTextView autoCompleteTextView;
     private EditText etName, etPrice, etCategory, etDescription;
-    Bitmap bitmap;
 
     private static final String TAG = "MyActivity";
 
     private Button btnAdd ,btnBrowse;
     ImageView img;
     String encodeImageString;
-
+    Bitmap bitmap;
     private static final String url="http://192.168.254.105/android/products.php";
 
     @Override
@@ -60,6 +60,10 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
         etName = findViewById(R.id.etName);
         etPrice = findViewById(R.id.etPrice);
@@ -141,7 +145,6 @@ public class ProductsActivity extends AppCompatActivity {
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);*/
         final String name = etName.getText().toString().trim();
         final String price = etPrice.getText().toString().trim();
-        double dbprice = Double.parseDouble(price);
         final String category = etCategory.getText().toString().trim();
         final String description = etDescription.getText().toString().trim();
         final String status = autoCompleteTextView.getText().toString().trim();
@@ -154,7 +157,7 @@ public class ProductsActivity extends AppCompatActivity {
                 etCategory.setText("");
                 etDescription.setText("");
                 img.setImageResource(R.drawable.ic_launcher_foreground);
-                Toast.makeText(ProductsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductsActivity.this, "success", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
