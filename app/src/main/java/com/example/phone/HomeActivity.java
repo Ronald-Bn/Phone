@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class  HomeActivity extends AppCompatActivity {
 
     Users users;
 
@@ -60,11 +61,11 @@ public class HomeActivity extends AppCompatActivity {
         emailTv.setText(uEmail);
         phoneTv.setText(uPhone);
 
-        /*if(uFullname.equals("admin")){
+        if(uFullname.equals("admin")){
             Intent i = new Intent(HomeActivity.this, ViewProductsActivity.class);
             startActivity(i);
             finish();
-        }*/
+        }
 
         recyclerView = findViewById(R.id.HomeRecyclerList);
         recyclerView.setHasFixedSize(true);
@@ -111,6 +112,15 @@ public class HomeActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (error.networkResponse == null) {
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        // Show timeout error message
+                        Toast.makeText(HomeActivity.this,
+                                "Oops. Timeout error!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+
                 Toast.makeText(HomeActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });

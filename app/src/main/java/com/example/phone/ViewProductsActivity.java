@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -95,6 +96,7 @@ public class ViewProductsActivity extends AppCompatActivity {
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(ViewProductsActivity.this);
+        request.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         requestQueue.add(request);
         requestQueue.start();
     }

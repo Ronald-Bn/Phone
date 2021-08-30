@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     Users users;
 
+    private static final String Url =  "http://192.168.254.105/android/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         email = etEmail.getText().toString().trim();
         password = etPassword.getText().toString().trim();
         if(!email.equals("") && !password.equals("")){
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.LOGIN_USERS, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
@@ -113,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Field can not be empty!", Toast.LENGTH_SHORT).show();
         }
     }
-
     public void register(View view){
         startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
     }

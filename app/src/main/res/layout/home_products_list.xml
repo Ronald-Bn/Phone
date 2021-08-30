@@ -25,13 +25,11 @@
 
             <ImageView
                 android:id="@+id/HomeImageIv"
-                android:layout_width="196dp"
-                android:layout_height="172dp"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="image"/>
+                android:src="@drawable/ic_launcher_foreground"
+                android:text="image" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
